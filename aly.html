@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>web aleeyah</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+  body {
+    background: linear-gradient(135deg, #ffffff 0%, #d4af37 50%, #ffffff 100%);
+    color: #b58b00;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1, h2 {
+    margin: 0 0 0.5rem;
+    color: #a37f00;
+    user-select: none;
+    font-weight: 700;
+  }
+  a {
+    color: #b5930a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+    color: #d4af37;
+    outline: none;
+  }
+
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.15);
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .tab-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    box-shadow: inset 0 0 15px #d4af3775;
+    color: #6f5800;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .tab-content::-webkit-scrollbar {
+    width: 7px;
+  }
+  .tab-content::-webkit-scrollbar-track {
+    background: #f1e9c236;
+    border-radius: 20px;
+  }
+  .tab-content::-webkit-scrollbar-thumb {
+    background: #d4af37cc;
+    border-radius: 20px;
+  }
+
+
+  #tab1 img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 0.5rem 0 1rem;
+    box-shadow: 0 2px 10px #d4af377f;
+    user-select: none;
+  }
+  #tab1 iframe {
+    width: 100%;
+    height: 40vh;
+    border: 1px solid #d4af37aa;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    background: #fffdfa;
+  }
+  #tab1 video {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    box-shadow: 0 0 18px #d4af3780;
+  }
+
+
+  form {
+    max-width: 100%;
+  }
+  form label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+    color: #b5930a;
+    user-select: none;
+  }
+  form input, form select {
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    margin-bottom: 1rem;
+    border: 1.8px solid #d4af37aa;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff9df;
+    color: #6f5800;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  form input::placeholder {
+    color: #bfae6a99;
+  }
+  form input:focus, form select:focus {
+    border-color: #d4af37;
+    background-color: #fff9dfcc;
+    color: #6f5800;
+    outline: none;
+  }
+  form button {
+    background-color: #d4af37;
+    color: #3a3a3a;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 900;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  form button:hover,
+  form button:focus {
+    background-color: #ffd54f;
+    color: #2b2b2b;
+    outline: none;
+  }
+
+  .tab-content h2 {
+    user-select:none;
+  }
+
+
+  .tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0 0 12px 12px;
+    overflow-x: auto;
+    flex-shrink: 0;
+    box-shadow: 0 -2px 8px #d4af3760;
+  }
+  .tabs button {
+    background: transparent;
+    border: none;
+    color: #b58b00;
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1 1 auto;
+    text-align: center;
+    font-weight: 700;
+    border-top: 4px solid transparent;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+  }
+  .tabs button:hover,
+  .tabs button:focus {
+    background-color: #f1df82cc;
+    color: #a37f00;
+    outline: none;
+  }
+  .tabs button.active {
+    background-color: #d4af37;
+    color: #3a3a3a;
+    cursor: default;
+    font-weight: 900;
+    border-top: 4px solid #9c7e00;
+  }
+
+  @media (max-width: 500px) {
+    #app {
+      border-radius: 0;
+    }
+    .tabs {
+      border-radius: 0;
+    }
+    .tab-content {
+      padding: 0.75rem 1rem;
+    }
+    .tabs button {
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+      min-width: 100px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="app" role="application">
+    <main id="tab1" class="tab-content" role="tabpanel" aria-labelledby="tab1-btn" tabindex="0">
+      <h2 class="judul-bouncing">HII, SELAMAT DATANG DI SITUS POLITIK by aleeyah</h2> <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+      <p><a href="https://www.indonesia.go.id" target="_blank" rel="noopener noreferrer">Kunjungi Website Resmi Indonesia</a></p>
+      <p>
+  <a href="https://asset.kompas.com/crops/FYbkumBablqtdBJVwarZyCnB7tM=/0x0:0x0/1200x800/data/photo/2020/08/14/5f35fef0461b6.jpg" target="_blank" rel="noopener noreferrer">
+    https://asset.kompas.com/.../5f35fef0461b6.jpg
+  </a>
+</p>
+
+<h3>PDF</h3>
+<a href="LAP_PEMWEB_ALYAH SAPUTRI_.105841107723.pdf" target="_blank" rel="noopener noreferrer" class="pdf-card">
+  📄 Klik untuk melihat PDF: LAP_PEMWEB_ALYAH SAPUTRI_.105841107723.pdf
+</a>
+      <iframe src="LAP_PEMWEB_ALYAH SAPUTRI_.105841107723.pdf" aria-label="Contoh PDF" ></iframe>
+      <h3>Video</h3>
+      <video controls preload="metadata" aria-label="Video Pemutaran" playsinline muted>
+        <source src="politik.mp4" type="video/webm" />
+        <source src="politik.mp4" type="video/mp4" />
+
+      </video>
+    </main>
+
+    <section id="tab2" class="tab-content" role="tabpanel" aria-labelledby="tab2-btn" tabindex="0" hidden>
+      <h2>Formulir Pendaftaran Anggota</h2>
+      <form id="memberForm" novalidate>
+        <label for="fullname">Nama Lengkap</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Masukkan nama lengkap Anda" required autocomplete="name" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="contoh@domain.com" required autocomplete="email" />
+
+        <label for="password">Kata Sandi</label>
+        <input type="password" id="password" name="password" minlength="6" required placeholder="Minimal 6 karakter" autocomplete="new-password" />
+
+        <label for="gender">Jenis Kelamin</label>
+        <select id="gender" name="gender" required>
+          <option value="" disabled selected>Pilih jenis kelamin</option>
+          <option value="pria">Pria</option>
+          <option value="wanita">Wanita</option>
+          <option value="lainnya">Lainnya</option>
+        </select>
+
+        <button type="submit">Daftar</button>
+      </form>
+      <p id="formMessage" aria-live="polite" style="color: #d4af37; font-weight: 700; margin-top:1rem;"></p>
+    </section>
+
+    <section id="tab3" class="tab-content" role="tabpanel" aria-labelledby="tab3-btn" tabindex="0" hidden>
+      <h2>Peran Partai Politik dalam Sistem Demokrasi di Indonesia</h2>
+      <p>Partai politik dalam sistem demokrasi di Indonesia memiliki peran penting sebagai penghubung antara rakyat dan pemerintah. Mereka mencetak calon-calon pemimpin, seperti anggota legislatif, kepala daerah, hingga presiden, melalui proses kaderisasi dan seleksi internal.</p>
+      <p>Selain itu, partai politik menjadi saluran bagi masyarakat untuk menyampaikan aspirasi dan pendapat, yang kemudian diperjuangkan di lembaga pemerintahan. Lewat wakilnya di DPR dan DPRD, partai politik ikut merumuskan undang-undang serta kebijakan publik. Mereka juga berperan mengawasi jalannya pemerintahan agar tetap sesuai dengan prinsip demokrasi dan tidak menyimpang dari kepentingan rakyat.</p>
+      <p>Melalui partai politik, suara rakyat diwakili secara efektif sehingga demokrasi dapat berjalan dengan baik, menjaga keseimbangan kekuasaan, dan memastikan bahwa kepentingan publik diakomodasi dalam pembuatan kebijakan nasional.</p>
+    </section>
+
+    <nav class="tabs" role="tablist" aria-label="Main Tabs">
+      <button role="tab" aria-selected="true" aria-controls="tab1" id="tab1-btn" class="active" tabindex="0">Situs &amp; Media</button>
+      <button role="tab" aria-selected="false" aria-controls="tab2" id="tab2-btn" tabindex="-1">Pendaftaran</button>
+      <button role="tab" aria-selected="false" aria-controls="tab3" id="tab3-btn" tabindex="-1">Tentang</button>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const tabs = document.querySelectorAll('.tabs button');
+      const panels = document.querySelectorAll('.tab-content');
+
+      function changeTab(e) {
+        const targetBtn = e.target;
+        if(!targetBtn || !targetBtn.id) return;
+
+        tabs.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+          btn.setAttribute('tabindex', '-1');
+        });
+        
+        panels.forEach(panel => {
+          panel.hidden = true;
+        });
+
+        targetBtn.classList.add('active');
+        targetBtn.setAttribute('aria-selected', 'true');
+        targetBtn.setAttribute('tabindex', '0');
+
+        const panelId = targetBtn.getAttribute('aria-controls');
+        const panel = document.getElementById(panelId);
+        if(panel) {
+          panel.hidden = false;
+          panel.focus();
+        }
+      }
+
+      tabs.forEach(tab => tab.addEventListener('click', changeTab));
+
+      const form = document.getElementById('memberForm');
+      const formMessage = document.getElementById('formMessage');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        formMessage.textContent = '';
+        
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        formMessage.textContent = 'Terima kasih telah mendaftar sebagai anggota!';
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
